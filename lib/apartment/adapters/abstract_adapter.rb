@@ -3,6 +3,7 @@
 module Apartment
   module Adapters
     # Abstract adapter from which all the Apartment DB related adapters will inherit the base logic
+    # rubocop:disable Metrics/ClassLength
     class AbstractAdapter
       include ActiveSupport::Callbacks
       define_callbacks :create, :switch
@@ -274,5 +275,6 @@ module Apartment
       class SeparateDbConnectionHandler < ::ActiveRecord::Base
       end
     end
+    # rubocop:enable Metrics/ClassLength
   end
 end
