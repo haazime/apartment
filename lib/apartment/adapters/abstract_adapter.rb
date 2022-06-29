@@ -8,6 +8,7 @@ module Apartment
       define_callbacks :create, :switch
 
       attr_writer :default_tenant
+      attr_reader :current_database_name
 
       #   @constructor
       #   @param {Hash} config Database config
@@ -77,6 +78,7 @@ module Apartment
             Apartment.connection.clear_query_cache
           end
         end
+        @current_database_name = tenant
       end
 
       #   Connect to tenant, do your biz, switch back to previous tenant
@@ -116,6 +118,7 @@ module Apartment
       #   Reset the tenant connection to the default
       #
       def reset
+        @current_database_name = nil
         Apartment.establish_connection @config
       end
 
